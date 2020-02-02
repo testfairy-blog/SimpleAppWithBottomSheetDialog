@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private AppBarConfiguration mAppBarConfiguration;
 
-	static private final String TESTFAIRY_APP_TOKEN = "SDK-aaaaaaaa";
+	static private final String TESTFAIRY_APP_TOKEN = "SDK-aaaaaaaaaa";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
 		NavigationUI.setupWithNavController(navigationView, navController);
 
 		// point to your single-tenant instance if needed
-		// TestFairy.setServerEndpoint("mycompany.testfairy.com");
+		TestFairy.setServerEndpoint("subdomain.testfairy.com");
 
 		// set up testfairy
-		TestFairy.setUserId("user-12345678");
-		TestFairy.setAttribute("email", "jack@black.com");
+		TestFairy.setUserId("jack@example.com");
 		TestFairy.setAttribute("paying", "true");
 		TestFairy.setAttribute("fullName", "Jack Black");
 
@@ -73,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
 				showBottomSheetDialog();
 			}
 		});
+
+		// if there are unsent feedbacks, try sending them now
+		TestFairy.sendPendingFeedbacks(this, TESTFAIRY_APP_TOKEN);
 	}
 
 	private void showBottomSheetDialog() {
